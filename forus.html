@@ -16,23 +16,45 @@
             align-items: center; /* Centers vertically */
             flex-direction: column; /* Stacks items vertically */
             height: 100vh; /* Ensures full screen height */
+            position: relative; /* keeps elements above the background */
         }
 
-        .background {
-            width = 100%;
-            height = 100vh;
-            display = flex;
-            transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+        /* Background Image */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('valentine-heart-background.jpg');
+            background-size: cover;
+            background-position: 0% 0%;
+            background-repeat: no-repeat;
+            filter: brightness(0.8);
+            z-index: -1;
+
+            /* Animation */
+            animation: moveBackground 10s linear infinite alternate;
         }
+
+        @keyframes moveBackground {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 50% 50%; }
+            100% { background-position: 100% 100%; }
+        }
+
 
         .message {
-            font-size: 32px;
+            color: white;
+            font-size: 40px;
             font-weight: bold;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 5px black;
         }
 
         .heart {
-            color: red;
+            color: white;
             font-size: 100px;
             animation: heartbeat 1s infinite alternate;
         }
@@ -49,9 +71,11 @@
         button {
             padding: 10px 20px;
             font-size: 20px;
-            background-color: #ff3366;
-            color: white;
+            background-color: white;
+            color: red;
+            font-weight: bold; 
             border: none;
+            border-style:groove;
             cursor: pointer;
             border-radius: 5px;
             margin: 10px;
@@ -59,7 +83,7 @@
         }
 
         button:hover {
-            background-color: #ff6699;
+            background-color:#f7b6b6;
         }
 
         #messageDisplay {
@@ -71,7 +95,6 @@
 </head>
 
 <body>
-    <img src="valentine-heart-background.jpg" class="background">
     <!-- Message Display -->
     <div class="message">Will you be my Valentine? 💖</div>
 
@@ -90,11 +113,16 @@
         function YayyMessage() {
             document.getElementById("messageDisplay").innerHTML = 
                 '<div class="heart">❤️</div>' + 
-                "Yay! ❤️ <br> Happy Valentine's Day! <br> I am soo lucky to have you 💘";
+                '<div style="color: #FFFFFF; font-weight: bold; text-shadow: 2px 2px 5px black;">' + 
+                    "Yay! ❤️ <br> Happy Valentine's Day! <br> I am soo lucky to have you 💘";
+                '</div>'
         }
 
         function begForYes() {
-            document.getElementById("messageDisplay").innerHTML = "Oh no! 💔 Pleaseeeeee say Yes! 🥺";
+            document.getElementById("messageDisplay").innerHTML = 
+            '<div style="color: #FFFFFF; font-weight: bold; text-shadow: 2px 2px 5px black;">'+
+                "Oh no! 💔 Pleaseeeeee say Yes! 🥺";
+            '</div>'
             
             // Make Yes button bigger each time No is clicked
             yesButtonSize += 5;
